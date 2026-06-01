@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>백운국 · BAEK WOON-KOOK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0b0c; --bg2:#141416; --fg:#f4f1ea; --muted:#9d9a90;
+    --gold:#e0a93b; --line:#26262a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:"Noto Sans KR",sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:"Cormorant Garamond",serif;}
+
+  /* ---- Top bar ---- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:40;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 30px; backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom, rgba(11,11,12,.85), rgba(11,11,12,0));
+  }
+  nav .brand{font-weight:700; letter-spacing:4px; font-size:.95rem;}
+  nav a{color:var(--muted); text-decoration:none; margin-left:24px; font-size:.82rem; letter-spacing:1px; transition:color .2s;}
+  nav a:hover{color:var(--gold);}
+  nav .links{display:flex;}
+  @media(max-width:600px){ nav .links{display:none;} }
+
+  /* ---- Hero ---- */
+  .hero{
+    position:relative; height:100vh; min-height:560px;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .hero .bg{
+    position:absolute; inset:0;
+    background:url("images/w01.jpg") center/cover no-repeat;
+    transform:scale(1.08); filter:saturate(1.1);
+    animation:slowzoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes slowzoom{ from{transform:scale(1.08);} to{transform:scale(1.18);} }
+  .hero .veil{
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, rgba(11,11,12,.45) 0%, rgba(11,11,12,.82) 70%, rgba(11,11,12,.96) 100%);
+  }
+  .hero .center{position:relative; text-align:center; padding:0 20px;}
+  .hero h1{
+    margin:0; font-weight:700; letter-spacing:14px;
+    font-size:clamp(3rem,11vw,7.5rem); line-height:1;
+    text-shadow:0 6px 40px rgba(0,0,0,.6);
+  }
+  .hero .en{
+    margin:18px 0 0; letter-spacing:8px; font-size:clamp(.8rem,2.4vw,1.05rem);
+    color:var(--gold); font-weight:500;
+  }
+  .hero .tag{margin:26px auto 0; max-width:520px; color:#d8d4ca; font-weight:300; font-size:.98rem;}
+  .hero .scroll{
+    position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+    color:var(--muted); font-size:.7rem; letter-spacing:3px; animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+  /* ---- Sections ---- */
+  section{padding:90px 26px;}
+  .head{max-width:1200px; margin:0 auto 46px; text-align:center;}
+  .head .k{color:var(--gold); letter-spacing:6px; font-size:.72rem; text-transform:uppercase;}
+  .head h2{font-size:clamp(1.8rem,5vw,2.8rem); margin:10px 0 0; font-weight:600; letter-spacing:2px;}
+  .head p{color:var(--muted); margin:14px auto 0; max-width:560px; font-weight:300; font-size:.95rem;}
+
+  /* ---- Works grid (masonry) ---- */
+  .works{column-count:3; column-gap:18px; max-width:1200px; margin:0 auto;}
+  @media(max-width:900px){ .works{column-count:2;} }
+  @media(max-width:560px){ .works{column-count:1;} }
+  .card{
+    position:relative; margin:0 0 18px; break-inside:avoid; cursor:pointer;
+    border-radius:6px; overflow:hidden; background:var(--bg2);
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  .card img{width:100%; display:block; opacity:0; transition:opacity .6s ease, transform .6s ease;}
+  .card img.loaded{opacity:1;}
+  .card:hover img{transform:scale(1.06);}
+  .card .ov{
+    position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:20px; opacity:0; transition:opacity .35s ease;
+    background:linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 45%, transparent 75%);
+  }
+  .card:hover .ov{opacity:1;}
+  .card .ov .t{font-family:"Cormorant Garamond",serif; font-size:1.45rem; font-weight:600;}
+  .card .ov .m{color:#cfcbbf; font-size:.8rem; font-weight:300; margin-top:2px;}
+
+  /* ---- Exhibition strip ---- */
+  .exh{background:var(--bg2);}
+  .exrow{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:1200px; margin:0 auto;}
+  @media(max-width:760px){ .exrow{grid-template-columns:1fr;} }
+  .exrow figure{margin:0; border-radius:6px; overflow:hidden; position:relative; cursor:pointer;}
+  .exrow img{width:100%; height:260px; object-fit:cover; display:block; transition:transform .5s ease; filter:grayscale(.15);}
+  .exrow figure:hover img{transform:scale(1.05); filter:none;}
+  .exrow figcaption{
+    position:absolute; left:0; right:0; bottom:0; padding:14px 16px;
+    background:linear-gradient(to top, rgba(0,0,0,.8), transparent);
+    font-size:.82rem; letter-spacing:1px;
+  }
+
+  /* ---- Lightbox ---- */
+  .lb{position:fixed; inset:0; z-index:60; display:none; background:rgba(8,8,9,.97); align-items:center; justify-content:center; flex-direction:column;}
+  .lb.open{display:flex;}
+  .lb img{max-width:92vw; max-height:80vh; border-radius:3px; box-shadow:0 20px 60px rgba(0,0,0,.6);}
+  .lb .cap{margin-top:18px; text-align:center;}
+  .lb .cap .t{font-family:"Cormorant Garamond",serif; font-size:1.5rem;}
+  .lb .cap .m{color:var(--muted); font-size:.82rem; margin-top:2px;}
+  .lb button{position:absolute; background:none; border:none; color:#fff; cursor:pointer; padding:12px 20px;}
+  .lb .close{top:10px; right:16px; font-size:2.1rem;}
+  .lb .prev,.lb .next{top:50%; transform:translateY(-50%); font-size:3rem; opacity:.7; transition:opacity .2s;}
+  .lb .prev:hover,.lb .next:hover{opacity:1;}
+  .lb .prev{left:10px;} .lb .next{right:10px;}
+
+  footer{padding:60px 20px 50px; text-align:center; border-top:1px solid var(--line);}
+  footer .name{font-family:"Cormorant Garamond",serif; font-size:1.6rem; letter-spacing:3px;}
+  footer .c{color:var(--muted); font-size:.78rem; margin-top:10px; letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">BAEK WOON-KOOK</div>
+  <div class="links">
+    <a href="#works">WORKS</a>
+    <a href="#exhibition">EXHIBITION</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="center">
+    <h1>백운국</h1>
+    <div class="en">BAEK WOON-KOOK · PAINTINGS</div>
+    <p class="tag">강렬한 색과 형태로 쌓아 올린 추상 회화.<br>유물과 풍경, 선과 면이 교차하는 작업들.</p>
+  </div>
+  <div class="scroll">SCROLL ↓</div>
+</header>
+
+<section id="works">
+  <div class="head">
+    <div class="k">Selected Works</div>
+    <h2>작품</h2>
+    <p>캔버스 위에 유화와 아크릴로 작업한 대표 회화들입니다.</p>
+  </div>
+  <div class="works" id="works-grid"></div>
+</section>
+
+<section id="exhibition" class="exh">
+  <div class="head">
+    <div class="k">Exhibition</div>
+    <h2>전시</h2>
+    <p>전시장에 걸린 작품과 현장의 기록.</p>
+  </div>
+  <div class="exrow" id="exh-grid"></div>
+</section>
+
+<div class="lb" id="lb">
+  <button class="close" id="close">&times;</button>
+  <button class="prev" id="prev">&#8249;</button>
+  <img id="lbImg" alt="" />
+  <div class="cap"><div class="t" id="lbT"></div><div class="m" id="lbM"></div></div>
+  <button class="next" id="next">&#8250;</button>
+</div>
+
+<footer>
+  <div class="name">Baek Woon-kook</div>
+  <div class="c">© <span id="yr"></span> 백운국. All rights reserved.</div>
+</footer>
+
+<script>
+  // ===== 작품 목록 (제목·연도·재료는 자유롭게 수정하세요) =====
+  const WORKS = [
+    { file:"w01.jpg", t:"Abstract",  m:"Oil & acrylic on canvas · 90 × 56 cm · 2020" },
+    { file:"w02.jpg", t:"Journey",   m:"Oil & acrylic on canvas · 2020" },
+    { file:"w03.jpg", t:"Lines",     m:"Acrylic on canvas · 2024" },
+    { file:"w04.jpg", t:"Field",     m:"Oil & acrylic on canvas · 73 × 60 cm · 2016" },
+    { file:"w05.jpg", t:"Abstripe",  m:"Oil & acrylic on canvas · 45 × 45 cm · 2018" },
+    { file:"w06.jpg", t:"Garden I",  m:"Acrylic on canvas · 2024" },
+    { file:"w07.jpg", t:"Garden II", m:"Acrylic on canvas · 2024" },
+    { file:"w08.jpg", t:"Relics",    m:"Oil & acrylic on canvas · 2020" }
+  ];
+  const EXH = [
+    { file:"ex01.jpg", t:"전시 전경 · 2024" },
+    { file:"ex02.jpg", t:"작가와 작품" },
+    { file:"ex03.jpg", t:"전시 작품들" }
+  ];
+  // ==========================================================
+
+  const wg = document.getElementById("works-grid");
+  WORKS.forEach((w,i)=>{
+    const c=document.createElement("div"); c.className="card";
+    const img=new Image(); img.src="images/"+w.file; img.alt=w.t; img.loading="lazy";
+    img.onload=()=>img.classList.add("loaded");
+    const ov=document.createElement("div"); ov.className="ov";
+    ov.innerHTML='<div class="t">'+w.t+'</div><div class="m">'+w.m+'</div>';
+    c.appendChild(img); c.appendChild(ov);
+    c.onclick=()=>openLb(i);
+    wg.appendChild(c);
+  });
+
+  const eg=document.getElementById("exh-grid");
+  EXH.forEach((e,i)=>{
+    const fig=document.createElement("figure");
+    const img=new Image(); img.src="images/"+e.file; img.alt=e.t; img.loading="lazy";
+    const cap=document.createElement("figcaption"); cap.textContent=e.t;
+    fig.appendChild(img); fig.appendChild(cap);
+    fig.onclick=()=>openLbItem({file:e.file,t:e.t,m:""});
+    eg.appendChild(fig);
+  });
+
+  const lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"),
+        lbT=document.getElementById("lbT"), lbM=document.getElementById("lbM");
+  let cur=0, mode="works";
+  function render(it){ lbImg.src="images/"+it.file; lbT.textContent=it.t; lbM.textContent=it.m||""; }
+  function openLb(i){ mode="works"; cur=i; render(WORKS[i]); lb.classList.add("open"); }
+  function openLbItem(it){ mode="single"; render(it); lb.classList.add("open"); }
+  function close(){ lb.classList.remove("open"); }
+  function step(d){ if(mode!=="works")return; cur=(cur+d+WORKS.length)%WORKS.length; render(WORKS[cur]); }
+
+  document.getElementById("close").onclick=close;
+  document.getElementById("prev").onclick=e=>{e.stopPropagation();step(-1);};
+  document.getElementById("next").onclick=e=>{e.stopPropagation();step(1);};
+  lb.addEventListener("click",e=>{ if(e.target===lb) close(); });
+  document.addEventListener("keydown",e=>{
+    if(!lb.classList.contains("open"))return;
+    if(e.key==="Escape")close();
+    if(e.key==="ArrowLeft")step(-1);
+    if(e.key==="ArrowRight")step(1);
+  });
+
+  document.getElementById("yr").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

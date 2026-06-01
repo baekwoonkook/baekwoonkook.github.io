@@ -1,0 +1,4 @@
+# 원본 대용량 이미지는 업로드하지 않습니다 (사이트에는 w/ex 파일만 사용)
+images/*
+!images/w0*.jpg
+!images/ex0*.jpg
