@@ -108,6 +108,25 @@
     font-size:.82rem; letter-spacing:1px;
   }
 
+  /* ---- Life / timeline ---- */
+  .timeline{max-width:740px; margin:0 auto; position:relative;}
+  .timeline::before{content:""; position:absolute; left:110px; top:8px; bottom:8px; width:1px; background:var(--line);}
+  .tl{position:relative; display:grid; grid-template-columns:110px 1fr; padding:0 0 34px;}
+  .tl:last-child{padding-bottom:0;}
+  .tl .yr{font-family:"Cormorant Garamond",serif; color:var(--gold); font-size:1.55rem; font-weight:600; line-height:1.1;}
+  .tl .body{position:relative; padding-left:36px;}
+  .tl .body::before{
+    content:""; position:absolute; left:-5px; top:7px; width:11px; height:11px; border-radius:50%;
+    background:var(--gold); box-shadow:0 0 0 4px rgba(224,169,59,.15);
+  }
+  .tl .body .desc{font-weight:300; font-size:1rem; color:var(--fg);}
+  @media(max-width:560px){
+    .timeline::before{left:0;}
+    .tl{grid-template-columns:1fr; gap:4px;}
+    .tl .yr{padding-left:24px;}
+    .tl .body{padding-left:24px;}
+  }
+
   /* ---- Lightbox ---- */
   .lb{position:fixed; inset:0; z-index:60; display:none; background:rgba(8,8,9,.97); align-items:center; justify-content:center; flex-direction:column;}
   .lb.open{display:flex;}
@@ -133,6 +152,7 @@
   <div class="links">
     <a href="#works">WORKS</a>
     <a href="#exhibition">EXHIBITION</a>
+    <a href="#life">LIFE</a>
   </div>
 </nav>
 
@@ -163,6 +183,14 @@
     <p>전시장에 걸린 작품과 현장의 기록.</p>
   </div>
   <div class="exrow" id="exh-grid"></div>
+</section>
+
+<section id="life">
+  <div class="head">
+    <div class="k">Biography</div>
+    <h2>살아온 길</h2>
+  </div>
+  <div class="timeline" id="life-timeline"></div>
 </section>
 
 <div class="lb" id="lb">
@@ -196,6 +224,12 @@
     { file:"ex03.jpg", t:"전시 작품들" },
     { file:"ex04.jpg", t:"베리타스미술상전 · 2024" }
   ];
+  // ===== 살아온 길 (연혁) =====
+  const LIFE = [
+    { y:"1994", d:"서울대학교 고고미술사학과 졸업" },
+    { y:"2008", d:"한국방송프로듀서연합회 대구경북 지부장" },
+    { y:"2010", d:"특집다큐멘터리 ‘우리 이름 가는 길을 묻다’ 한국방송대상 수상" }
+  ];
   // ==========================================================
 
   const wg = document.getElementById("works-grid");
@@ -218,6 +252,13 @@
     fig.appendChild(img); fig.appendChild(cap);
     fig.onclick=()=>openLbItem({file:e.file,t:e.t,m:""});
     eg.appendChild(fig);
+  });
+
+  const tg=document.getElementById("life-timeline");
+  LIFE.forEach(e=>{
+    const r=document.createElement("div"); r.className="tl";
+    r.innerHTML='<div class="yr">'+e.y+'</div><div class="body"><div class="desc">'+e.d+'</div></div>';
+    tg.appendChild(r);
   });
 
   const lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"),
