@@ -234,11 +234,14 @@
     { y:"2010", d:"특집다큐멘터리 ‘우리 이름 가는 길을 묻다’ 한국방송대상 수상" }
   ];
   // ==========================================================
+  // 이미지 캐시 무효화용 버전 (이미지를 새로 교체할 때마다 숫자를 바꾸세요)
+  const V = "20260603b";
+  const src = f => "images/" + f + "?v=" + V;
 
   const wg = document.getElementById("works-grid");
   WORKS.forEach((w,i)=>{
     const c=document.createElement("div"); c.className="card";
-    const img=new Image(); img.src="images/"+w.file; img.alt=w.t; img.loading="lazy";
+    const img=new Image(); img.src=src(w.file); img.alt=w.t; img.loading="lazy";
     img.onload=()=>img.classList.add("loaded");
     const ov=document.createElement("div"); ov.className="ov";
     ov.innerHTML='<div class="t">'+w.t+'</div><div class="m">'+w.m+'</div>';
@@ -250,7 +253,7 @@
   const eg=document.getElementById("exh-grid");
   EXH.forEach((e,i)=>{
     const fig=document.createElement("figure");
-    const img=new Image(); img.src="images/"+e.file; img.alt=e.t; img.loading="lazy";
+    const img=new Image(); img.src=src(e.file); img.alt=e.t; img.loading="lazy";
     const cap=document.createElement("figcaption"); cap.textContent=e.t;
     fig.appendChild(img); fig.appendChild(cap);
     fig.onclick=()=>openLbItem({file:e.file,t:e.t,m:""});
@@ -267,7 +270,7 @@
   const lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"),
         lbT=document.getElementById("lbT"), lbM=document.getElementById("lbM");
   let cur=0, mode="works";
-  function render(it){ lbImg.src="images/"+it.file; lbT.textContent=it.t; lbM.textContent=it.m||""; }
+  function render(it){ lbImg.src=src(it.file); lbT.textContent=it.t; lbM.textContent=it.m||""; }
   function openLb(i){ mode="works"; cur=i; render(WORKS[i]); lb.classList.add("open"); }
   function openLbItem(it){ mode="single"; render(it); lb.classList.add("open"); }
   function close(){ lb.classList.remove("open"); }
