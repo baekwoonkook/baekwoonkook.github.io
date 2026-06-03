@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>작가 소개 · 백운국</title>
+<meta name="description" content="백운국 작가 노트와 약력." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=20260603c" />
+</head>
+<body>
+
+<header class="banner">
+  <div class="k">Biography</div>
+  <h1>작가 소개</h1>
+  <p id="intro"></p>
+  <div class="crumb"><a href="index.html">HOME</a> &nbsp;/&nbsp; ABOUT</div>
+</header>
+
+<!-- 작가 노트 + 약력 -->
+<section>
+  <div class="about">
+    <div class="statement reveal">
+      <div class="k" style="color:var(--gold); letter-spacing:4px; font-size:.7rem;">ARTIST NOTE</div>
+      <h2 class="serif" style="font-size:1.6rem; margin:8px 0 18px;">작가 노트</h2>
+      <div id="statement"></div>
+    </div>
+    <div class="reveal">
+      <div class="k" style="color:var(--gold); letter-spacing:4px; font-size:.7rem;">TIMELINE</div>
+      <h2 class="serif" style="font-size:1.6rem; margin:8px 0 18px;">살아온 길</h2>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 연락 안내 -->
+<section class="alt">
+  <div class="head reveal">
+    <div class="k">Contact</div>
+    <h2>작품 문의</h2>
+    <p>작품 구입·전시·협업 문의는 이메일로 보내주세요.</p>
+    <a class="btn more" href="contact.html">연락하기 →</a>
+  </div>
+</section>
+
+<script src="assets/data.js?v=20260603c"></script>
+<script src="assets/site.js?v=20260603c"></script>
+<script>
+  window.pageInit = function () {
+    document.getElementById("intro").textContent = SITE.intro;
+    document.getElementById("statement").innerHTML =
+      SITE.statement.map(p => `<p>${p}</p>`).join("");
+    const tg = document.getElementById("timeline");
+    LIFE.forEach(e => {
+      const r = document.createElement("div"); r.className = "tl";
+      r.innerHTML = `<div class="yr">${e.y}</div><div class="body"><div class="desc">${e.d}</div></div>`;
+      tg.appendChild(r);
+    });
+  };
+</script>
+</body>
+</html>

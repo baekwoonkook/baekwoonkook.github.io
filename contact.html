@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>연락처 · 백운국</title>
+<meta name="description" content="백운국 작품 문의 연락처." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=20260603c" />
+</head>
+<body>
+
+<header class="banner">
+  <div class="k">Contact</div>
+  <h1>연락처</h1>
+  <p>작품 구입·전시·협업 등 어떤 문의든 환영합니다.</p>
+  <div class="crumb"><a href="index.html">HOME</a> &nbsp;/&nbsp; CONTACT</div>
+</header>
+
+<section>
+  <div class="contact reveal">
+    <p class="big">작품 문의</p>
+    <a class="mail" id="mail" href="#"></a>
+    <p>이메일로 연락 주시면 작품 이미지·가격·전시 일정 등을 안내해 드립니다.<br>
+       빠른 시일 내에 답신드리겠습니다.</p>
+    <div style="margin-top:30px;"><a class="btn" href="works.html">작품 둘러보기</a></div>
+  </div>
+</section>
+
+<script src="assets/data.js?v=20260603c"></script>
+<script src="assets/site.js?v=20260603c"></script>
+<script>
+  window.pageInit = function () {
+    const m = document.getElementById("mail");
+    m.textContent = SITE.email;
+    m.href = "mailto:" + SITE.email;
+  };
+</script>
+</body>
+</html>

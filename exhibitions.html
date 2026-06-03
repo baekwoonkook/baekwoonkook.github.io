@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전시 · 백운국</title>
+<meta name="description" content="백운국 전시 기록." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css?v=20260603c" />
+</head>
+<body>
+
+<header class="banner">
+  <div class="k">Exhibition</div>
+  <h1>전시</h1>
+  <p>전시장에 걸린 작품과 현장의 기록. 사진을 누르면 크게 볼 수 있습니다.</p>
+  <div class="crumb"><a href="index.html">HOME</a> &nbsp;/&nbsp; EXHIBITION</div>
+</header>
+
+<section>
+  <div class="exrow" id="exh-grid"></div>
+</section>
+
+<script src="assets/data.js?v=20260603c"></script>
+<script src="assets/site.js?v=20260603c"></script>
+<script>
+  window.pageInit = function () {
+    const eg = document.getElementById("exh-grid");
+    EXH.forEach((e, i) => {
+      const fig = document.createElement("figure"); fig.className = "reveal";
+      const img = new Image(); img.src = imgSrc(e.file); img.alt = e.t; img.loading = "lazy";
+      const cap = document.createElement("figcaption");
+      cap.textContent = e.t + (e.year ? " · " + e.year : "");
+      fig.appendChild(img); fig.appendChild(cap);
+      fig.onclick = () => openLightbox(EXH.map(x => ({ file:x.file, t:x.t, m:x.year })), i);
+      eg.appendChild(fig);
+    });
+  };
+</script>
+</body>
+</html>
