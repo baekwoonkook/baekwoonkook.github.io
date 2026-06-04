@@ -53,3 +53,12 @@ baekwoonkook.github.io/
 python -m http.server 8765
 ```
 → 브라우저로 http://localhost:8765
+
+## 휴대폰 홈 화면에 앱처럼 설치 (PWA)
+이 사이트는 PWA로 만들어져 홈 화면에 아이콘으로 설치할 수 있습니다.
+- **아이폰(Safari)**: 사이트 접속 → 하단 **공유(□↑)** → **홈 화면에 추가**
+- **안드로이드(Chrome)**: 사이트 접속 → 우상단 **⋮** → **앱 설치 / 홈 화면에 추가**
+
+관련 파일: `manifest.webmanifest`(앱 정보), `sw.js`(서비스 워커),
+`assets/icon-*.png`·`assets/apple-touch-icon.png`(아이콘).
+아이콘을 바꾸려면 위 png들을 교체하고 `?v=` 캐시 버전을 올리세요.
