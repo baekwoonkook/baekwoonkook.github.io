@@ -106,6 +106,10 @@
       const ov = document.createElement("div"); ov.className = "ov";
       ov.innerHTML = `<div class="t">${w.t}</div><div class="m">${w.year || ""}</div>`;
       a.appendChild(img); a.appendChild(ov);
+      if (w.sold) {
+        const b = document.createElement("span"); b.className = "badge"; b.textContent = "SOLD";
+        a.appendChild(b);
+      }
       container.appendChild(a);
     });
   };

@@ -103,6 +103,24 @@ section{padding:84px 26px;}
 .card:hover .ov{opacity:1;}
 .card .ov .t{font-family:"Cormorant Garamond",serif; font-size:1.45rem; font-weight:600;}
 .card .ov .m{color:#cfcbbf; font-size:.8rem; font-weight:300; margin-top:2px;}
+.card .badge{
+  position:absolute; top:12px; left:12px; z-index:2;
+  background:rgba(11,11,12,.78); color:var(--gold); border:1px solid var(--gold);
+  font-size:.62rem; letter-spacing:2px; font-weight:600; padding:4px 9px; border-radius:30px;
+  backdrop-filter:blur(4px);
+}
+
+/* 작품 상세 - 판매 / 원본 확인서 */
+.status{display:inline-flex; align-items:center; gap:8px; margin:14px 0 0; font-size:.72rem; letter-spacing:2px;}
+.status .dot{width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(224,169,59,.15);}
+.status .sold{color:var(--gold); font-weight:600;}
+.cert-box{margin-top:24px; padding:18px 20px; border:1px solid var(--line); border-radius:8px; background:var(--bg2);}
+.cert-box .lbl{color:var(--gold); letter-spacing:3px; font-size:.66rem; text-transform:uppercase;}
+.cert-box .desc2{color:var(--muted); font-size:.85rem; font-weight:300; margin:6px 0 14px;}
+.cert-thumb{display:flex; gap:14px; align-items:center; cursor:pointer;}
+.cert-thumb img{width:84px; height:84px; object-fit:cover; border-radius:5px; border:1px solid var(--line); flex:none;}
+.cert-thumb .go{color:var(--fg); font-size:.86rem; border-bottom:1px solid var(--gold); transition:color .2s;}
+.cert-thumb:hover .go{color:var(--gold);}
 
 /* ---- Exhibition strip ---- */
 .exrow{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:var(--maxw); margin:0 auto;}
