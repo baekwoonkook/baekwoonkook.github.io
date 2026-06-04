@@ -2,3 +2,4 @@
 images/*
 !images/w[0-9]*.jpg
 !images/ex0*.jpg
+!images/cert_*.jpg

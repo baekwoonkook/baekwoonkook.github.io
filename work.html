@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/style.css?v=20260603c" />
+<link rel="stylesheet" href="assets/style.css?v=20260604a" />
 </head>
 <body>
 
@@ -16,8 +16,8 @@
   <div class="pager" id="pager"></div>
 </section>
 
-<script src="assets/data.js?v=20260603c"></script>
-<script src="assets/site.js?v=20260603c"></script>
+<script src="assets/data.js?v=20260604a"></script>
+<script src="assets/site.js?v=20260604a"></script>
 <script>
   window.pageInit = function () {
     const params = new URLSearchParams(location.search);
@@ -27,6 +27,20 @@
     const w = WORKS[idx];
     document.title = w.t + " · 백운국";
 
+    const statusHtml = w.sold
+      ? `<div class="status"><span class="dot"></span><span class="sold">SOLD · 판매 완료</span></div>`
+      : "";
+    const certHtml = (w.sold && w.cert)
+      ? `<div class="cert-box">
+           <div class="lbl">Certificate of Authenticity</div>
+           <div class="desc2">원본 확인서(작품보증서)${w.certInfo ? " · " + w.certInfo : ""}</div>
+           <div class="cert-thumb" id="certThumb">
+             <img src="${imgSrc(w.cert)}" alt="원본 확인서" />
+             <span class="go">원본 확인서 보기 →</span>
+           </div>
+         </div>`
+      : "";
+
     const detail = document.getElementById("detail");
     detail.innerHTML =
       `<div class="figwrap reveal"><img id="art" src="${imgSrc(w.file)}" alt="${w.t}" /></div>
@@ -35,18 +49,27 @@
          <div class="k" style="margin-top:14px;">Painting</div>
          <h1>${w.t}</h1>
          <div class="sub">${w.year || ""}</div>
+         ${statusHtml}
          <p class="desc">${w.d || ""}</p>
          <dl>
            <div><dt>연도</dt><dd>${w.year || "—"}</dd></div>
            <div><dt>재료</dt><dd>${w.m || "—"}</dd></div>
            <div><dt>작가</dt><dd>백운국 (Baek Woon-kook)</dd></div>
+           ${w.sold ? `<div><dt>소장</dt><dd>개인 소장 (판매 완료)</dd></div>` : ""}
          </dl>
+         ${certHtml}
          <div style="margin-top:28px;"><a class="btn ghost" href="works.html">← 작품 목록으로</a></div>
        </div>`;
 
     // 클릭하면 확대 (라이트박스)
     document.getElementById("art").onclick = () =>
       openLightbox([{ file:w.file, t:w.t, m:(w.year ? w.year + " · " : "") + (w.m || "") }], 0);
+
+    // 원본 확인서 보기
+    if (w.sold && w.cert) {
+      document.getElementById("certThumb").onclick = () =>
+        openLightbox([{ file:w.cert, t:w.t + " · 원본 확인서", m:w.certInfo || "" }], 0);
+    }
 
     // 이전 / 다음
     const prev = WORKS[(idx - 1 + WORKS.length) % WORKS.length];
