@@ -133,4 +133,11 @@
     if (typeof window.pageInit === "function") window.pageInit();
     initReveal(); // pageInit이 추가한 동적 요소까지 관찰
   });
+
+  // 서비스 워커 등록 (홈 화면 설치 / 오프라인 캐시)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
 })();
