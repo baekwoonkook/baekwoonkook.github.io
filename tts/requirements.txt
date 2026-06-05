@@ -1,0 +1,5 @@
+# ElevenLabs 사용 시
+requests>=2.31
+
+# Google Cloud TTS 사용 시 (google provider를 쓸 때만 필요)
+google-cloud-texttospeech>=2.16
