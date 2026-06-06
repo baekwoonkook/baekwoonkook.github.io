@@ -6,16 +6,17 @@
   - elevenlabs : ElevenLabs TTS (가장 자연스러운 다국어 음성)
   - google     : Google Cloud Text-to-Speech (한국어 뉴럴 음성)
 
+API 키 넣는 법:
+  tts/.env.example 을 복사해 tts/.env 로 만들고, 그 안에 키만 적으면 된다.
+  (.env 는 .gitignore 에 등록되어 깃에 올라가지 않는다.)
+  환경변수(export)로 직접 넣어도 되며, 그 경우 .env 보다 우선한다.
+
 사용 예:
   # 1) 의존 패키지 설치
   pip install -r tts/requirements.txt
 
-  # 2-a) ElevenLabs 사용
-  export ELEVENLABS_API_KEY="발급받은_키"
+  # 2) tts/.env 에 키를 적은 뒤 실행
   python tts/synthesize.py --provider elevenlabs --out mary-stuart.mp3
-
-  # 2-b) Google Cloud 사용 (서비스 계정 JSON 경로 지정)
-  export GOOGLE_APPLICATION_CREDENTIALS="/path/to/key.json"
   python tts/synthesize.py --provider google --out mary-stuart.mp3
 
 옵션:
@@ -32,6 +33,25 @@ from pathlib import Path
 
 # API 한 번에 보낼 수 있는 대략적 글자 제한(여유분 포함)
 CHUNK_LIMIT = 1600
+
+
+def load_dotenv(path: Path) -> None:
+    """tts/.env 파일을 읽어 환경변수로 올린다(외부 패키지 없이 동작).
+
+    이미 설정된 환경변수는 덮어쓰지 않는다(export가 우선).
+    형식: KEY=VALUE, 한 줄에 하나. '#'로 시작하는 줄과 빈 줄은 무시.
+    """
+    if not path.exists():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 def read_paragraphs(path: Path) -> list[str]:
@@ -138,6 +158,9 @@ def main() -> None:
     parser.add_argument("--voice", default=None)
     parser.add_argument("--speed", type=float, default=0.95)
     args = parser.parse_args()
+
+    # tts/.env 에 적어둔 키를 환경변수로 불러온다
+    load_dotenv(Path(__file__).resolve().parent / ".env")
 
     src = Path(args.input)
     if not src.exists():

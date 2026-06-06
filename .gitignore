@@ -7,3 +7,10 @@ images/*
 # Python
 __pycache__/
 *.pyc
+
+# API 키 (절대 커밋 금지)
+.env
+tts/.env
+
+# 생성된 오디오 파일
+*.mp3
