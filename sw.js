@@ -1,5 +1,5 @@
 /* 백운국 갤러리 · 서비스 워커 (홈 화면 설치 + 간단 오프라인 캐시) */
-const CACHE = "bwk-v20260604c";
+const CACHE = "bwk-v20260607a";
 const CORE = [
   "./",
   "./index.html",
@@ -8,11 +8,11 @@ const CORE = [
   "./exhibitions.html",
   "./about.html",
   "./contact.html",
-  "./assets/style.css?v=20260604c",
-  "./assets/data.js?v=20260604c",
-  "./assets/site.js?v=20260604c",
-  "./assets/icon-192.png?v=20260604c",
-  "./assets/icon-512.png?v=20260604c",
+  "./assets/style.css?v=20260607a",
+  "./assets/data.js?v=20260607a",
+  "./assets/site.js?v=20260607a",
+  "./assets/icon-192.png?v=20260607a",
+  "./assets/icon-512.png?v=20260607a",
   "./manifest.webmanifest"
 ];
 
