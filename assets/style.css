@@ -91,6 +91,14 @@ section{padding:84px 26px;}
 .head .more{display:inline-block; margin-top:22px;}
 .alt{background:var(--bg2);}
 
+/* ---- Film (작품 영상) ---- */
+.filmwrap{
+  max-width:980px; margin:0 auto; border-radius:10px; overflow:hidden;
+  background:#000; box-shadow:0 24px 70px rgba(0,0,0,.55);
+  border:1px solid var(--line);
+}
+.filmplayer{width:100%; aspect-ratio:16/9; display:block; background:#000;}
+
 /* ---- Works grid (masonry) ---- */
 .works{column-count:3; column-gap:18px; max-width:var(--maxw); margin:0 auto;}
 @media(max-width:900px){.works{column-count:2;}}
